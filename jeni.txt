@@ -1,0 +1,99 @@
+@RestController
+@RequestMapping("/testapi")
+public class Mycontroller {
+
+    @Autowired
+    private Studentservice Studentservice;
+
+    @GetMapping
+    public List<student> getStudents() {
+        return Studentservice.getStudent();
+    }
+
+    @PostMapping
+    public student addstudents(@RequestBody student student){
+        return Studentservice.addStudent(student);
+    }
+    @PostMapping
+    public student addstudent(@RequestBody student student){
+        return Studentservice.addStudent(student);
+    }
+    @DeleteMapping("{id}")
+    public String deleteStudents(@PathVariable int id) {
+        return Studentservice.deletestudent(Id);
+    }
+
+    }
+
+
+
+
+@Service
+public class Studentservice {
+
+    @Autowired
+    private service.StudentsRepository studentsRepository;
+    private Object StudentsRepository;
+
+    public student addstudent(student students) {
+        return studentsRepository.Save(student);
+    }
+
+    public List<student> getStudent(){
+    return service.StudentsRepository.findAll();
+    }
+    public student updateStudent(student student) {
+        student std = StudentsRepository, findbyid (student,getId()),get());
+        std.setId(student,getId());
+        std.setName(student,getName());
+        std.setName(student,getCity);
+        return StudentsRepository.save(std);
+    }
+    public String deletestudent(int Id){
+        StudentsRepository.deletebyId(Id);
+        return "student has been deleted";
+    }
+
+}
+@Document(collection = "studentsdemo")
+public class student{
+    @Id
+    private int id;
+    private String name;
+    private String city;
+
+    public student(int id, String name , String city) {
+        super();
+        this.id = id;
+        this.name= name;
+        this.city=city;
+    }
+
+    public int getId() {
+
+        return id;
+    }
+    public void setId(int id) {
+        this.id=id;
+    }
+    public String getName( int id) {
+
+        return name;
+    }
+
+    public void setName(String Name) {
+        this.name = name;
+
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+
+        this.city = city;
+    }
+}
+
+
