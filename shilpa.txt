@@ -1,0 +1,52 @@
+@RestController
+public class SecurityController {
+
+    @GetMapping("/")
+    public String Show1(){
+        return ("<h1> hello welcome tp GPT Karwar</h1>");
+
+    }
+    @GetMapping("/user")
+    public String Show2(){
+        return("<h1> hello welcome to user page</h1>");
+
+    }
+
+    @GetMapping("/admin")
+    public String Show3(){
+        return("<h1> hello welcome to admin page</h1>");
+    }
+    }
+
+
+
+@EnableWebSecurity
+@Configuration
+public class SecurityConfiguration {
+    @Bean
+    public SecurityFilterChain SecurityFilterchain(HttpSecurity http) throws Exception{
+        http.authorizeHttpRequests()
+                .requestMatchers("/admin").hasRole("ADMIN")
+                .requestMatchers("/user").hasRole("USER")
+                .requestMatchers("/").permitAll()
+                .and().formLogin();
+        return http.build();
+
+
+    }
+    @Bean
+    public UserDetailsService userDetailsService(){
+        UserDetails x= User.withDefaultPasswordEncoder()
+                .username("student")
+                .password("1234")
+                .roles("USER")
+                .build();
+        UserDetails y= User.withDefaultPasswordEncoder()
+                .username("principle")
+                .password("4321")
+                .roles("ADMIN","USER")
+                .build();
+        return new InMemoryUserDetailsManager(x,y);
+
+    }
+}
