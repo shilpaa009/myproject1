@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>loginpage</title>
+    <style>
+        body {
+            background-color: rgba(239, 182, 70, 0.811);
+            background-position: center;
+            background-size: cover;
+        }
+        .form {
+            background-color: rgba(0, 0, 0, 0.5);
+            height: 260px;
+            width: 200px;
+            padding: 50px;
+            top: 20%;
+            left: 37%;
+            position: absolute;
+            color: aliceblue;
+            border-radius: 10px;
+            box-shadow: 10px 5px 10px 5px solid rgba(4, 4, 4, 0.5);
+        }
+        form h1 {
+            color: orange;
+            margin-top: -10px;
+            text-align: center;
+            font-weight: bold;
+            height: 30px;
+        }
+        form p {
+            color: orange;
+        }
+        input {
+            border-radius: 10px;
+            padding: 10px;
+            width: 150px;
+            align-items: center;
+            color: black;
+            background-color: white;
+        }
+        input[type="submit"] {
+            color: black;
+            margin-top: 25px;
+            background-color: orange;
+            left: 30px;
+            padding: 7px;
+            margin-left: 40px;
+            width: 100px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        #p {
+            color: rgb(243, 246, 248);
+            font-size: small;
+        }
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            background-color: rgba(19, 16, 1, 0.7);
+            transition: ease-in 0.2s;
+            width: 200px;
+            cursor: pointer;
+            color: white;
+        }
+        input[type="submit"]:hover {
+            background-color: rgb(231, 124, 24);
+        }
+        p a {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <form class="form">
+        <h1>Login page</h1>
+        <p>Username:</p>
+        <input type="text" placeholder="enter username" required="requried" id="username">
+        <p>Password:</p>
+        <input type="password" placeholder="enter your password" required="requried" id="password"><br>
+        <input type="submit" value="Login" onclick="validate()"><br>
+    </form>
+    <script>
+        function validate() {
+            var user = document.getElementById('username').value
+            var pass = document.getElementById('password').value
+            list = {
+                "anisha": 'ani03',
+                'akshu': 0904,
+                'pooja': 'poo2004',
+                'disha': 'dishutom'
+            }
+            for (let value in list) {
+                if (user == value && pass == list[value]) {
+                    alert("login succesfully");
+                    window.location.replace("output.html");
+                    return true
+
+                }
+            }
+            alert("login failed,Enter correct details");
+            return false;
+        }
+    </script>
+</body>
+</html>
