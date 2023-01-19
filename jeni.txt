@@ -1,0 +1,135 @@
+@RestController
+@RequestMapping("/testapi")
+public class Mycontroller {
+
+    @Autowired
+    private Studentservice Studentservice;
+
+    @GetMapping
+    public List<student> getStudents() {
+        return Studentservice.getStudent();
+    }
+
+    @PostMapping
+    public student addstudents(@RequestBody student student){
+        return Studentservice.addStudent(student);
+    }
+    @PostMapping
+    public student addstudent(@RequestBody student student){
+        return Studentservice.addStudent(student);
+    }
+    @DeleteMapping("{id}")
+    public String deleteStudents(@PathVariable int id) {
+        return Studentservice.deletestudent(Id);
+    }
+
+    }
+
+
+
+
+   export default App;
+students.java
+
+package com.example.springboootdemo.Model;
+
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "studentdemo")
+public class Students {
+
+    @Id
+    private int id;
+    private String name;
+    private String city;
+
+    public Students(int id, String name, String city){
+        super();
+        this.id=id;
+        this.name=name;
+        this.city=city;
+    }
+    public int getId() {
+
+        return id;
+    }
+
+    public void setId(int id) {
+
+        this.id = id;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getName() {
+
+        return name;
+    }
+
+    public void setName(String name) {
+
+        this.name = name;
+    }
+
+
+}
+
+
+studentsservice.java
+
+package com.example.springboootdemo.Service;
+
+
+        import com.example.springboootdemo.Model.Students;
+        import com.example.springboootdemo.Repository.StudentsRepository;
+        import org.apache.catalina.Store;
+        import org.springframework.beans.factory.annotation.Autowired;
+        import org.springframework.stereotype.Service;
+
+        import java.util.List;
+@Service
+public class StudentsService {
+    @Autowired
+    private StudentsRepository studentsRepository;
+
+    public Students addStudent(Students student){
+        return studentsRepository.save(student);
+    }
+    public List<Students> getStudent(){
+        return studentsRepository.findAll();
+    }
+    public Students updateStudent(Students student){
+        Students std=studentsRepository.findById(student.getId()).get();
+        std.setId(student.getId());
+        std.setName(student.getName());
+        std.setCity(student.getCity());
+        return studentsRepository.save(std);
+
+    }
+    public String deleteStudent(int id){
+        studentsRepository.deleteById(id);
+        return "student has been deleted ";
+    }
+}
+
+
+studentsRepository
+
+package com.example.springboootdemo.Repository;
+
+import com.example.springboootdemo.Model.Students;
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+public interface StudentsRepository extends MongoRepository<Students,Integer> {
+}
+
+
+
